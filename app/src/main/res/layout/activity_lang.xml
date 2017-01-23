@@ -1,0 +1,102 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="com.ermile.sarshomari.Activities.LangActivity">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/textviewm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:typeface="monospace"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:text="Choose Your Language" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/textviewm"
+
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="10dp"
+            android:padding="10dp"
+            android:clickable="true"
+
+            android:id="@+id/_us_"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/united_states"
+                android:id="@+id/imageView"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="115dp"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:typeface="sans"
+                android:text="ENGLISH"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/_us_"
+
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="10dp"
+            android:padding="10dp"
+            android:clickable="true"
+            android:id="@+id/_fa_"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/iran"
+                android:id="@+id/imageView2"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="115dp"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:id="@+id/fap_lang"
+                android:text="فارسی"
+                android:layout_height="wrap_content" />
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

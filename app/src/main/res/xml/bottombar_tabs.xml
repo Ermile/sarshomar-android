@@ -1,0 +1,20 @@
+<tabs>
+    <tab
+        id="@+id/tab_polls"
+        icon="@drawable/ic_poll_black_24dp"
+        barColorWhenSelected="@color/colorPrimary"
+        title="@string/tab_poll" />
+
+    <tab
+        id="@+id/tab_search"
+        icon="@drawable/ic_pageview_black_24dp"
+        barColorWhenSelected="#00796B"
+        title="@string/tab_search" />
+
+    <tab
+        id="@+id/new_poll"
+        icon="@drawable/ic_add_box_black_24dp"
+        barColorWhenSelected="#b4852d"
+        title="@string/tab_new_poll" />
+
+</tabs>

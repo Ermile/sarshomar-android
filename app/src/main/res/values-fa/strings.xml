@@ -1,0 +1,127 @@
+<resources>
+    <string name="app_name">سرشمار</string>
+    <string name="tab_poll">دانش سرشمار</string>
+    <string name="tab_new_poll">نظرسنجی جدید</string>
+    <string name="tab_search">جستجو</string>
+
+    <string name="action_settings">تنظیمات</string>
+    <string name="action_help">مرکز راهنمایی</string>
+    <string name="action_profile">حساب کاربری</string>
+
+    <!-- INTRO STRING -->
+
+    <string name="test_welcom">به سرشمار خوش آمدید!</string>
+
+
+    <!-- SETTINGS STRINGS -->
+    <string name="setting">تنظیمات</string>
+    <string name="settings_language_title">زبان برنامه</string>
+    <string name="settings_language_desc">زبان برنامه را انتخاب کنید</string>
+    <string name="accept">تایید</string>
+    <string name="cancel">لغو</string>
+    <string name="exit">آیا میخواهید از برنامه خارج شوید؟</string>
+
+
+    <string-array name="listArray">
+        <item>English</item>
+        <item>فارسی</item>
+    </string-array>
+
+    <string-array name="listValues">
+        <item>en</item>
+        <item>fa</item>
+    </string-array>
+
+    <!-- POLLS STRINGS -->
+    <string name="previous">قبلی</string>
+    <string name="verify_choice">تایید</string>
+    <string name="next">بعدی</string>
+    <string name="answer">پاسخ:</string>
+    <string name="download">دانلود</string>
+    <string name="poll_results">نتیجه نظرسنجی</string>
+
+
+    <!-- PROFILE STRINGS -->
+    <string name="profile">حساب کاربری</string>
+
+    <string-array name="profile_array">
+        <item>مشاهده اطلاعات</item>
+        <item>نظرسنجی های من</item>
+        <item>امور مالی</item>
+        <item>ویرایش حساب کاربری</item>
+        <item>خروج از حساب کاربری</item>
+    </string-array>
+
+    <!-- NEW POLL STRINGS -->
+    <string-array name="poll_type_array">
+        <item>تک گزینه ای</item>
+        <item>چند گزینه ای</item>
+        <item>اطلاع رسانی</item>
+        <item>امتیازی(ستاره ای)</item>
+        <item>تشریحی</item>
+        <item>فایل</item>
+        <item>محدوده عددی</item>
+    </string-array>
+
+    <string name="type_title">نوع نظرسنجی:</string>
+
+    <string name="new_title">عنوان</string>
+
+    <string name="new_description">توضیحات</string>
+
+    <string name="new_option">گزینه جدید</string>
+
+    <string name="new_true">گزینه صحیح</string>
+
+    <string name="new_submit">ارسال</string>
+
+    <string name="options_title">گزینه ها:</string>
+
+    <string name="new_option_error">عنوان گزینه خالی است</string>
+
+    <string name="photo_title">تصویر نظرسنجی:</string>
+
+    <string name="upload">آپلود</string>
+
+    <string name="choosefromgallery">انخاب از گالری</string>
+
+    <string name="takephoto">دوربین</string>
+
+    <string name="addphoto">انتخاب تصویر</string>
+
+    <string name="wanttoremove">حذف گزینه؟</string>
+
+    <string name="uploadfile">آپلود فایل مربوط یه نظرسنجی:</string>
+
+    <string name="numbersrange">محدوده اعداد:</string>
+
+    <string name="from">از:</string>
+
+    <string name="to">تا:</string>
+
+
+
+
+
+
+    <string name="singlechoice">تک گزینه ای</string>
+
+    <string name="multiplechoice">چند گزینه ای</string>
+
+    <string name="notify">اطلاع رسانی</string>
+
+    <string name="score">امتیازی(ستاره ای)</string>
+
+    <string name="descriptive">تشریحی</string>
+
+    <string name="file">فایل</string>
+
+    <string name="rangebar">محدوده عددی</string>
+
+    <string name="taptochoosetrue">- برای انتخاب گزینه(ها) صحیح گزینه مورد نظر را لمس کنید</string>
+
+    <string name="holdtodelete">- برای حذف یک گزینه، گزینه مورد نظر را نگه دارید</string>
+
+
+
+</resources>

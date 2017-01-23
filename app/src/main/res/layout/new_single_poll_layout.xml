@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <View
+            android:background="#ee40af88"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/options_title"
+            android:layout_marginTop="40dp"
+            tools:ignore="MissingPrefix"
+            fontPath="fonts/IRANSans.ttf"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/taptochoosetrue"
+            android:layout_marginTop="5dp"
+            tools:ignore="MissingPrefix"
+            android:textSize="14sp"
+            android:textColor="@color/colorAccent"
+            fontPath="fonts/IRANSans.ttf"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/holdtodelete"
+            android:layout_marginTop="3dp"
+            tools:ignore="MissingPrefix"
+            android:textSize="14sp"
+            android:textColor="@color/colorAccent"
+            fontPath="fonts/IRANSans.ttf"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_poll_new_option_EditText"
+                android:hint="@string/new_option"
+                />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_add_circle_black_24dp"
+                android:id="@+id/add_option_button"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:id="@+id/options_ListView"
+            android:scrollbars="none"
+            android:layout_height="450dp">
+
+        </ListView>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>
+

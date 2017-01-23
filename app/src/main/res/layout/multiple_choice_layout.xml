@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.nirhart.parallaxscroll.views.ParallaxScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:parallax_factor="3"
+     >
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/windowspoll"
+        android:id="@+id/single_answer_image"
+        android:layout_height="200dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="#fff"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/single_answer_title"
+            android:layout_marginTop="10dp"
+            android:textColor="#000"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:text="بهترین برند خودرو کدام است؟"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/answer_type"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/colorAccent"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:text="نوع نظرسنجی: چند گزینه ای"
+            android:layout_height="wrap_content" />
+
+        <com.ermile.sarshomari.Classes.CheckBoxGroupView
+            android:id="@+id/cbGroup"
+            android:columnCount="1"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+        </com.ermile.sarshomari.Classes.CheckBoxGroupView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layoutDirection="rtl"
+            android:layout_marginTop="20dp"
+            android:id="@+id/choose_panel"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="0px"
+                android:textColor="#fff"
+                android:background="#0c5a69"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_weight="1"
+                android:text="@string/next"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/next_poll_button"
+                android:layout_height="50dp" />
+
+            <Button
+                android:layout_width="0px"
+                android:textColor="#fff"
+                android:background="#4CAF50"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/verify_poll_button"
+                android:text="@string/verify_choice"
+                android:layout_height="50dp" />
+
+
+
+            <Button
+                android:layout_width="0px"
+                android:textColor="#fff"
+                android:background="#0c5a68"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:text="@string/previous"
+                android:id="@+id/previous_poll_button"
+                android:layout_height="50dp" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/single_answer_description"
+            android:layout_marginTop="5dp"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:padding="10dp"
+            android:lineSpacingExtra="10dp"
+            android:text="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد."
+            android:layout_height="wrap_content" />
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+</com.nirhart.parallaxscroll.views.ParallaxScrollView>
