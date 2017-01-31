@@ -44,6 +44,7 @@ dependencies {
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
+    compile 'com.google.android.gms:play-services-auth:9.2.1'
     testCompile 'junit:junit:4.12'
 }
 

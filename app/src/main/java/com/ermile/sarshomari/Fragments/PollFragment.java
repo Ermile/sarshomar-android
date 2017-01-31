@@ -265,11 +265,11 @@ public class PollFragment extends Fragment {
 
 
         List<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(32, 0));
-        entries.add(new BarEntry(43, 1));
-        entries.add(new BarEntry(13, 2));
-        entries.add(new BarEntry(54, 3));
-        entries.add(new BarEntry(22, 4));
+        entries.add(new BarEntry(32f, 0));
+        entries.add(new BarEntry(43f, 1));
+        entries.add(new BarEntry(13f, 2));
+        entries.add(new BarEntry(54f, 3));
+        entries.add(new BarEntry(22f, 4));
 
 
         BarDataSet dataset = new BarDataSet(entries, "");
@@ -282,17 +282,21 @@ public class PollFragment extends Fragment {
         labels.add("فورد");
 
         BarData data = new BarData(labels, dataset);
+
+
         dataset.setColors(ColorTemplate.COLORFUL_COLORS); //
         dataset.setValueFormatter(new PercentFormatter());
         dataset.setValueTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
         dataset.setValueTextColor(Color.BLACK);
+        dataset.setBarSpacePercent(10f);
+
+
 
         dataset.setValueTextSize(13);
         mbarChart.setDescription("");
-
+        mbarChart.setDrawValueAboveBar(true);
         mbarChart.setData(data);
-
-
+        mbarChart.setMaxVisibleValueCount(10);
 
 
 

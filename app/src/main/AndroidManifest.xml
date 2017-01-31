@@ -14,21 +14,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.introActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Activities.LangActivity">
+        <activity android:name=".Activities.introActivity" android:screenOrientation="portrait" />
+        <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.LangActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.SettingsActivity" />
-        <activity android:name=".Activities.ProfileActivity" />
-        <activity android:name=".Activities.HelpActivity" />
+        <activity android:name=".Activities.SettingsActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activities.ProfileActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.HelpActivity" android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.Main2Activity"
             android:label="@string/title_activity_main2"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"></activity>
     </application>
 

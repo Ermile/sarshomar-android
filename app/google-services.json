@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "443097657277",
+    "project_id": "firebase-sarshomari"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443097657277:android:91dfd0e8edf565f4",
+        "android_client_info": {
+          "package_name": "com.ermile.sarshomari"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443097657277-26el1a0tsvkgv5dc6sv7lduhr4lrlnhb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ermile.sarshomari",
+            "certificate_hash": "A6854A7399249D4E873EE51E4CA211A9BCC78E6E"
+          }
+        },
+        {
+          "client_id": "443097657277-lq1920uccbc20l42arrdgg8mkcrb51ct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiR84aiK5sAG8WBRHhrdOpKBmh8tRKaX8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

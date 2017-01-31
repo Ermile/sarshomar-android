@@ -13,12 +13,17 @@
         android:layout_gravity="center_horizontal"
         android:layout_height="310dp" />
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/barchart"
-        android:layout_width="310dp"
-        android:visibility="gone"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="310dp" />
+
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barchart"
+            android:layout_width="350dp"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="320dp" />
+
+
+
 
 
 

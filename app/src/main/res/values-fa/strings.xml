@@ -43,6 +43,7 @@
 
     <!-- PROFILE STRINGS -->
     <string name="profile">حساب کاربری</string>
+    <string name="loginwithgoogle">ورود با حساب گوگل</string>
 
     <string-array name="profile_array">
         <item>مشاهده اطلاعات</item>

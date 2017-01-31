@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:paddingBottom="20dp"
             android:id="@+id/login"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_height="match_parent">
 
 
@@ -137,6 +137,13 @@
 
                     />
 
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/btn_sign_in"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+
 
 
 
@@ -163,12 +170,16 @@
 
 
 
+
+
+
+
         </RelativeLayout>
 
 
         <ListView
             android:layout_width="match_parent"
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/profile_list"
             android:entries="@array/profile_array"
             android:layout_height="wrap_content">

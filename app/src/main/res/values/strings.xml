@@ -46,6 +46,7 @@
 
 
     <string name="profile">Profile</string>
+    <string name="loginwithgoogle">sign in with google account</string>
 
     <string-array name="profile_array">
         <item>My Profile</item>
