@@ -19,8 +19,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.ermile.sarshomari.AppController;
 import com.ermile.sarshomari.Classes.CheckBoxGroupView;
 import com.ermile.sarshomari.R;
 import com.github.mikephil.charting.charts.BarChart;
@@ -35,15 +42,22 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class PollFragment extends Fragment {
+
+    public RequestQueue mRequestQueue;
 
 
 
@@ -59,6 +73,9 @@ public class PollFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        AppController mApp = ((AppController) getActivity().getApplicationContext());
+        mRequestQueue = mApp.getmRequestQueue();
 
         View vi = inflater.inflate(R.layout.fragment_poll, container, false);
 
@@ -84,7 +101,7 @@ public class PollFragment extends Fragment {
 
 
 
-
+        getAndSetRandomPoll();
 
 
         final CheckBoxGroupView cbGroup = (CheckBoxGroupView) vi.findViewById(R.id.cbGroup);
@@ -188,7 +205,7 @@ public class PollFragment extends Fragment {
 
 
 
-    /////////////////////////////the main function for polls system/////////////////////////////
+    /////////////////////////////the main functions for polls system/////////////////////////////
 
 
 
@@ -310,5 +327,49 @@ public class PollFragment extends Fragment {
 
 
     }
+
+
+
+public void getAndSetRandomPoll(){
+    String token_guest = getActivity().getSharedPreferences("guest_token", MODE_PRIVATE).getString("gtkn",null);
+
+    final String url = "https://dev.sarshomar.com/api/v1/poll/random?token="+token_guest;
+
+// prepare the Request
+    JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+            new Response.Listener<JSONObject>()
+            {
+                @Override
+                public void onResponse(JSONObject response) {
+                    // display response
+                    Log.d("Response", response.toString());
+                }
+            },
+            new Response.ErrorListener()
+            {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("Error.Response", error.toString());
+                    error.printStackTrace();
+                }
+            }
+    ){
+        @Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            HashMap<String, String> headers = new HashMap<>();
+
+            headers.put("Authorization", "$2y$07$wWPwmNYVE0MfYu043zYwuONdnhKqKfp3SKzXiUu9eJXVmzw2.frh2");
+            return headers;
+        }
+    };
+
+
+// add it to the RequestQueue
+    mRequestQueue.add(getRequest);
+}
+
+
+
+
 
 }

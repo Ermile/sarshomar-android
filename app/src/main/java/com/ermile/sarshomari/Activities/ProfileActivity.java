@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
 
-    private SignInButton btnSignIn;
+    private Button btnSignIn;
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -52,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
+        btnSignIn = (Button) findViewById(R.id.btn_sign_in);
         btnSignIn.setOnClickListener(this);
 
 
@@ -73,6 +73,8 @@ public class ProfileActivity extends AppCompatActivity implements
                 onBackPressed();
             }
         });
+
+
 
 
 
@@ -127,8 +129,8 @@ public class ProfileActivity extends AppCompatActivity implements
                 .build();
 
         // Customizing G+ button
-        btnSignIn.setSize(SignInButton.SIZE_STANDARD);
-        btnSignIn.setScopes(gso.getScopeArray());
+
+
 
 
     }

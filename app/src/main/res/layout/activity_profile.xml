@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="ثبت نام"
-                    android:layout_marginRight="14dp"
+                    android:layout_marginStart="14dp"
                     android:id="@+id/btn_signup"
 
                     android:background="#f44336"
@@ -137,12 +137,7 @@
 
                     />
 
-                <com.google.android.gms.common.SignInButton
-                    android:id="@+id/btn_sign_in"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    />
+
 
 
 
@@ -165,6 +160,20 @@
                 android:textColor="#ffffff"
                 android:height="40dp"
                 android:paddingTop="3dp"
+                />
+
+            <Button
+                android:id="@+id/btn_sign_in"
+
+                android:text="@string/loginwithgoogle"
+                android:layout_width="130dp"
+                android:height="40dp"
+                android:textColor="#fff"
+                android:background="#a7050d"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="14dp"
+                android:layout_below="@id/btn_forget"
                 />
 
 

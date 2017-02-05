@@ -28,25 +28,52 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.ermile.sarshomari.Activities.HelpActivity;
 import com.ermile.sarshomari.Activities.ProfileActivity;
 import com.ermile.sarshomari.Activities.SettingsActivity;
+import com.ermile.sarshomari.Classes.HttpRequest;
+import com.ermile.sarshomari.Classes.universalGETRestAPI;
 import com.ermile.sarshomari.Fragments.PollFragment;
 import com.ermile.sarshomari.Fragments.SearchFragment;
 import com.ermile.sarshomari.Fragments.newPollFragment;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.ncapdevi.fragnav.FragNavController;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import cz.msebera.android.httpclient.Header;
+
+import cz.msebera.android.httpclient.conn.ssl.SSLSocketFactory;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
+    public RequestQueue mRequestQueue;
     public Menu menu;
     static {
     AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -160,6 +187,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        AppController mApp = ((AppController) getApplicationContext());
+        mRequestQueue = mApp.getmRequestQueue();
+        checkToken();
 
 
 
@@ -180,6 +210,9 @@ public class MainActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
         setTitleGravityBasedOnLocale();
+
+
+
 
     }
 
@@ -286,6 +319,72 @@ public class MainActivity extends AppCompatActivity {
             title_toolbar.setGravity(Gravity.LEFT);
         }
     }
+
+
+
+
+
+
+
+
+
+public void checkToken(){
+
+    if (getSharedPreferences("guest_token", MODE_PRIVATE).getString("gtkn",null) == null) {
+        final String url = "https://dev.sarshomar.com/api/v1/token/guest";
+
+// prepare the Request
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+
+
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // display response
+                        Log.d("Response", response.toString());
+
+
+                        try {
+                            String guest_token = response.getJSONObject("msg").getJSONObject("callback").getString("token");
+                            SharedPreferences pref = getSharedPreferences("guest_token", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("gtkn", guest_token);
+                            editor.apply();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error.Response", error.toString());
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+
+                headers.put("Authorization", "$2y$07$wWPwmNYVE0MfYu043zYwuONdnhKqKfp3SKzXiUu9eJXVmzw2.frh2");
+                return headers;
+            }
+        };
+
+// add it to the RequestQueue
+        mRequestQueue.add(getRequest);
+    }else {
+        //Toast.makeText(getApplicationContext(),getSharedPreferences("guest_token", MODE_PRIVATE).getString("gtkn",null),Toast.LENGTH_LONG).show();
+    }
+
+}
+
+
+
+
 
 
 
