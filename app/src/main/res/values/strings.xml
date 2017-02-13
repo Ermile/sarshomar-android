@@ -124,5 +124,55 @@
 
     <string name="holdtodelete">- Hold an option to delete it</string>
 
+    <string name="hideresults">Hide Poll Results </string>
+
+    <string name="new_tags">Tags</string>
+
+    <string name="cat_title">Categories:</string>
+
+    <string name="schedule_title">Schedule Publish:</string>
+
+    <string name="pickdate">Pick Date And Time</string>
+
+    <string name="age_title">Limit Age</string>
+
+    <string name="graduate_title">Limit Graduate</string>
+
+    <string name="marriage_title">Limit Marrital</string>
+
+    <string name="employ_title">Limit Employment</string>
+
+    <string name="underdiploma">Under Diploma</string>
+
+    <string name="Diploma">Diploma</string>
+
+    <string name="twoyear">2 Year College</string>
+
+    <string name="bachelor">Bachelor</string>
+
+    <string name="master">Master</string>
+
+    <string name="phd">Phd</string>
+
+    <string name="employed">Employed</string>
+
+    <string name="unemployed">Unemployed</string>
+
+    <string name="retired">Retired</string>
+
+    <string name="married">Married</string>
+
+    <string name="single">Single</string>
+
+    <string name="gender">Gender</string>
+
+    <string name="male">Male</string>
+
+    <string name="female">Female</string>
+
+
+
+
+
 
 </resources>

@@ -36,6 +36,25 @@
                     app:ms_text_color="@color/colorAccent"
                     android:layout_height="wrap_content"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:text="@string/cat_title"
+                android:layout_marginTop="20dp"
+                tools:ignore="MissingPrefix"
+                fontPath="fonts/IRANSans.ttf"
+                android:layout_height="wrap_content" />
+
+            <com.ermile.sarshomari.Classes.CheckBoxGroupView
+                android:id="@+id/cbGroup"
+                android:columnCount="4"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+            </com.ermile.sarshomari.Classes.CheckBoxGroupView>
+
 
 
             <RelativeLayout
@@ -46,6 +65,8 @@
                     android:layout_width="match_parent"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
+
+
 
                     <EditText
                         android:layout_width="match_parent"
@@ -65,7 +86,23 @@
                         android:hint="@string/new_description"
                         />
 
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:id="@+id/new_poll_tags_EditText"
+                        android:hint="@string/new_tags"
+                        />
 
+
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:text="@string/hideresults"
+                        android:id="@+id/hide_results_switch"
+                        android:layout_marginTop="40dp"
+                        android:layout_height="wrap_content" />
 
 
 
@@ -76,6 +113,8 @@
                         tools:ignore="MissingPrefix"
                         fontPath="fonts/IRANSans.ttf"
                         android:layout_height="wrap_content" />
+
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -105,6 +144,241 @@
 
                     </LinearLayout>
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="@string/schedule_title"
+                        android:layout_marginTop="40dp"
+                        tools:ignore="MissingPrefix"
+                        fontPath="fonts/IRANSans.ttf"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:background="#f44336"
+                            android:text="@string/pickdate"
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/pick_date_time_btn"
+                            android:textColor="#ffffff"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:id="@+id/new_poll_schedule_txt"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="100dp" />
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="@string/age_title"
+                        android:layout_marginTop="40dp"
+                        tools:ignore="MissingPrefix"
+                        fontPath="fonts/IRANSans.ttf"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:textColor="#000"
+                            android:layout_weight="1"
+                            android:layout_marginTop="13dp"
+                            android:text="@string/from"
+                            android:layout_height="wrap_content" />
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_weight="3"
+                            android:inputType="number"
+
+                            android:layout_height="wrap_content"
+                            android:id="@+id/age_from_edittext"
+                            android:textSize="15sp"
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:textColor="#000"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="13dp"
+                            android:layout_weight="1"
+                            android:text="@string/to"
+                            android:layout_height="wrap_content" />
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:inputType="number"
+                            android:layout_weight="3"
+
+                            android:layout_height="wrap_content"
+                            android:id="@+id/age_to_edittext"
+                            android:textSize="15sp"
+                            />
+
+
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="@string/graduate_title"
+                        android:layout_marginTop="20dp"
+                        tools:ignore="MissingPrefix"
+                        fontPath="fonts/IRANSans.ttf"
+                        android:layout_height="wrap_content" />
+
+                    <com.ermile.sarshomari.Classes.CheckBoxGroupView
+                        android:id="@+id/cbGroupGrade"
+                        android:columnCount="4"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:text="@string/underdiploma"
+                            android:layout_height="wrap_content" />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:text="@string/Diploma"
+                            android:layout_height="wrap_content" />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:text="@string/twoyear"
+                            android:layout_height="wrap_content" />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:text="@string/bachelor"
+                            android:layout_height="wrap_content" />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:text="@string/master"
+                            android:layout_height="wrap_content" />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:text="@string/phd"
+                            android:layout_height="wrap_content" />
+
+
+
+                    </com.ermile.sarshomari.Classes.CheckBoxGroupView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="@string/employ_title"
+                        android:layout_marginTop="20dp"
+                        tools:ignore="MissingPrefix"
+                        fontPath="fonts/IRANSans.ttf"
+                        android:layout_height="wrap_content" />
+
+                    <com.ermile.sarshomari.Classes.CheckBoxGroupView
+                        android:id="@+id/cbGroupemploy"
+                        android:columnCount="4"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:text="@string/employed"
+                            android:layout_height="wrap_content" />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:text="@string/unemployed"
+                            android:layout_height="wrap_content" />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:text="@string/retired"
+                            android:layout_height="wrap_content" />
+
+
+                    </com.ermile.sarshomari.Classes.CheckBoxGroupView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="@string/marriage_title"
+                        android:layout_marginTop="20dp"
+                        tools:ignore="MissingPrefix"
+                        fontPath="fonts/IRANSans.ttf"
+                        android:layout_height="wrap_content" />
+
+                    <com.ermile.sarshomari.Classes.CheckBoxGroupView
+                        android:id="@+id/cbGroupmarr"
+                        android:columnCount="4"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:text="@string/married"
+                            android:layout_height="wrap_content" />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:text="@string/single"
+                            android:layout_height="wrap_content" />
+
+
+                    </com.ermile.sarshomari.Classes.CheckBoxGroupView>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="@string/gender"
+                        android:layout_marginTop="20dp"
+                        tools:ignore="MissingPrefix"
+                        fontPath="fonts/IRANSans.ttf"
+                        android:layout_height="wrap_content" />
+
+                    <com.ermile.sarshomari.Classes.CheckBoxGroupView
+                        android:id="@+id/cbGroupsex"
+                        android:columnCount="4"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:text="@string/male"
+                            android:layout_height="wrap_content" />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:text="@string/female"
+                            android:layout_height="wrap_content" />
+
+
+                    </com.ermile.sarshomari.Classes.CheckBoxGroupView>
+
+
+
+
+
+
                     <!--single choice poll-->
                     <include layout="@layout/new_single_poll_layout" android:id="@+id/single_choose_poll" android:visibility="gone" />
 
@@ -115,19 +389,25 @@
                     <!--range poll-->
                     <include layout="@layout/new_rangebar_poll_layout" android:id="@+id/range_poll" android:visibility="gone"/>
 
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:id="@+id/submit_poll"
+                        android:text="@string/new_submit"
+                        android:textColor="#ffffff"
+                        android:layout_marginBottom="80dp"
+                        android:background="#8BC34A"
+                        android:layout_height="wrap_content" />
+
                 </LinearLayout>
+
+
 
 
 
             </RelativeLayout>
 
-            <Button
-                android:layout_width="match_parent"
-                android:text="@string/new_submit"
-                android:textColor="#ffffff"
-                android:background="#8BC34A"
-                android:layout_marginTop="40dp"
-                android:layout_height="wrap_content" />
+
 
         </LinearLayout>
 

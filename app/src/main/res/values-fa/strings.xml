@@ -123,6 +123,52 @@
 
     <string name="holdtodelete">- برای حذف یک گزینه، گزینه مورد نظر را نگه دارید</string>
 
+    <string name="hideresults">پنهان سازی نتایج  </string>
+
+    <string name="new_tags">برچسب ها</string>
+
+    <string name="cat_title">دسته بندی ها:</string>
+
+    <string name="schedule_title">زمان بندی انتشار:</string>
+
+    <string name="pickdate">انتخاب زمان و تاریخ</string>
+
+    <string name="age_title">سن شرکت کنندگان</string>
+
+    <string name="graduate_title">تحصیلات شرکت کنندگان</string>
+
+    <string name="marriage_title">وضععیت ازدواج شرکت کنندگان</string>
+
+    <string name="employ_title">شغل شرکت کنندگان</string>
+
+    <string name="underdiploma">زیر دیپلم</string>
+
+    <string name="Diploma">دیپلم</string>
+
+    <string name="twoyear">کاردانی</string>
+
+    <string name="bachelor">کارشناسی</string>
+
+    <string name="master">کارشناسی ارشد</string>
+
+    <string name="phd">دکتری</string>
+
+    <string name="employed">شاغل</string>
+
+    <string name="unemployed">بیکار</string>
+
+    <string name="retired">بازنشسته</string>
+
+    <string name="married">متاهل</string>
+
+    <string name="single">مجرد</string>
+
+    <string name="gender">جنسیت</string>
+
+    <string name="male">مرد</string>
+
+    <string name="female">زن</string>
+
 
 
 </resources>

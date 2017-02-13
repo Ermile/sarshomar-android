@@ -330,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
 
 public void checkToken(){
 
-    if (getSharedPreferences("guest_token", MODE_PRIVATE).getString("gtkn",null) == null) {
+
         final String url = "https://dev.sarshomar.com/api/v1/token/guest";
 
 // prepare the Request
@@ -376,9 +376,7 @@ public void checkToken(){
 
 // add it to the RequestQueue
         mRequestQueue.add(getRequest);
-    }else {
-        //Toast.makeText(getApplicationContext(),getSharedPreferences("guest_token", MODE_PRIVATE).getString("gtkn",null),Toast.LENGTH_LONG).show();
-    }
+
 
 }
 

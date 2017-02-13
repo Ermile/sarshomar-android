@@ -333,6 +333,8 @@ public class PollFragment extends Fragment {
 public void getAndSetRandomPoll(){
     String token_guest = getActivity().getSharedPreferences("guest_token", MODE_PRIVATE).getString("gtkn",null);
 
+
+
     final String url = "https://dev.sarshomar.com/api/v1/poll/random?token="+token_guest;
 
 // prepare the Request
