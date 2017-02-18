@@ -179,6 +179,33 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="0dp"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:background="#f44336"
+                            android:text="@string/pickdateend"
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/pick_date_time_btn_end"
+                            android:textColor="#ffffff"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:id="@+id/new_poll_schedule_txt_end"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="100dp" />
+
+
+                    </LinearLayout>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:text="@string/age_title"
@@ -253,31 +280,37 @@
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:text="@string/underdiploma"
+                            android:tag="under_diploma"
                             android:layout_height="wrap_content" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:text="@string/Diploma"
+                            android:tag="diploma"
                             android:layout_height="wrap_content" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:text="@string/twoyear"
+                            android:tag="2_year_college"
                             android:layout_height="wrap_content" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:text="@string/bachelor"
+                            android:tag="bachelor"
                             android:layout_height="wrap_content" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:text="@string/master"
+                            android:tag="master"
                             android:layout_height="wrap_content" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:text="@string/phd"
+                            android:tag="phd"
                             android:layout_height="wrap_content" />
 
 
@@ -302,16 +335,19 @@
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:text="@string/employed"
+                            android:tag="employee"
                             android:layout_height="wrap_content" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:text="@string/unemployed"
+                            android:tag="unemployed"
                             android:layout_height="wrap_content" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:text="@string/retired"
+                            android:tag="retired"
                             android:layout_height="wrap_content" />
 
 
@@ -335,11 +371,13 @@
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:text="@string/married"
+                            android:tag="married"
                             android:layout_height="wrap_content" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:text="@string/single"
+                            android:tag="single"
                             android:layout_height="wrap_content" />
 
 
@@ -364,11 +402,13 @@
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:text="@string/male"
+                            android:tag="male"
                             android:layout_height="wrap_content" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:text="@string/female"
+                            android:tag="female"
                             android:layout_height="wrap_content" />
 
 

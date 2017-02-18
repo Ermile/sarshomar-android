@@ -331,11 +331,11 @@ public class PollFragment extends Fragment {
 
 
 public void getAndSetRandomPoll(){
-    String token_guest = getActivity().getSharedPreferences("guest_token", MODE_PRIVATE).getString("gtkn",null);
+    final String token_guest = getActivity().getSharedPreferences("guest_token", MODE_PRIVATE).getString("gtkn",null);
 
 
 
-    final String url = "https://dev.sarshomar.com/api/v1/poll/random?token="+token_guest;
+    final String url = "https://dev.sarshomar.com/api/v1/poll/ask?token="+token_guest;
 
 // prepare the Request
     JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -344,7 +344,7 @@ public void getAndSetRandomPoll(){
                 @Override
                 public void onResponse(JSONObject response) {
                     // display response
-                    Log.d("Response", response.toString());
+                    Log.d("Response_random", response.toString());
                 }
             },
             new Response.ErrorListener()
@@ -360,7 +360,7 @@ public void getAndSetRandomPoll(){
         public Map<String, String> getHeaders() throws AuthFailureError {
             HashMap<String, String> headers = new HashMap<>();
 
-            headers.put("Authorization", "$2y$07$wWPwmNYVE0MfYu043zYwuONdnhKqKfp3SKzXiUu9eJXVmzw2.frh2");
+            headers.put("Authorization", token_guest);
             return headers;
         }
     };

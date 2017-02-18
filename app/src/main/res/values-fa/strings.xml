@@ -131,7 +131,9 @@
 
     <string name="schedule_title">زمان بندی انتشار:</string>
 
-    <string name="pickdate">انتخاب زمان و تاریخ</string>
+    <string name="pickdate">انتخاب زمان و تاریخ شروع</string>
+
+    <string name="pickdateend">انتخاب زمان و تاریخ پایان</string>
 
     <string name="age_title">سن شرکت کنندگان</string>
 

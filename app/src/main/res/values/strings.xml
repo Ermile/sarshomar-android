@@ -132,7 +132,9 @@
 
     <string name="schedule_title">Schedule Publish:</string>
 
-    <string name="pickdate">Pick Date And Time</string>
+    <string name="pickdate">Pick Start Date And Time</string>
+
+    <string name="pickdateend">Pick End Date And Time</string>
 
     <string name="age_title">Limit Age</string>
 

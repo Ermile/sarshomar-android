@@ -44,6 +44,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.daimajia.androidanimations.library.Techniques;
@@ -58,6 +59,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,6 +71,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -78,7 +83,10 @@ import java.util.Map;
 import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.ermile.sarshomari.R.id.age_from_edittext;
+import static com.ermile.sarshomari.R.id.age_to_edittext;
 import static com.ermile.sarshomari.R.id.cbGroup;
+import static com.ermile.sarshomari.R.id.cbGroupmarr;
 import static com.ermile.sarshomari.R.id.hide_results_switch;
 import static com.ermile.sarshomari.R.id.new_poll_description_EditText;
 import static com.ermile.sarshomari.R.id.new_poll_tags_EditText;
@@ -88,7 +96,7 @@ import static com.ermile.sarshomari.R.id.new_poll_title_EditText;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class newPollFragment extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class newPollFragment extends Fragment {
 
     ArrayList<String> OptionsArray = new ArrayList<String>();
     ArrayList<String> CorrectOptionsArray = new ArrayList<String>();
@@ -104,9 +112,10 @@ public class newPollFragment extends Fragment implements DatePickerDialog.OnDate
     private DateFormat dateFormat;
     private SimpleDateFormat timeFormat;
     TextView datetimetxt;
+    TextView datetimetxt_end;
     MaterialSpinner spinner;
     Boolean poll_hide;
-
+    String image_path="null";
     JSONArray answers_j_array;
 
 
@@ -123,6 +132,7 @@ public class newPollFragment extends Fragment implements DatePickerDialog.OnDate
         thumbView = (ImageView) vi.findViewById(R.id.new_poll_thumbnail);
         filenametext = (TextView) vi.findViewById(R.id.new_poll_file_name);
         datetimetxt = (TextView) vi.findViewById(R.id.new_poll_schedule_txt);
+        datetimetxt_end = (TextView) vi.findViewById(R.id.new_poll_schedule_txt_end);
         answers_j_array = new JSONArray();
         //HttpRequest Catching queue
         AppController mApp = ((AppController) getActivity().getApplicationContext());
@@ -296,15 +306,68 @@ public class newPollFragment extends Fragment implements DatePickerDialog.OnDate
         Button upload_file_btn = (Button) vi.findViewById(R.id.upload_file_btn);
         Button submit_poll_btn = (Button) vi.findViewById(R.id.submit_poll);
         Button date_btn = (Button) vi.findViewById(R.id.pick_date_time_btn);
+        Button date_btn_end = (Button) vi.findViewById(R.id.pick_date_time_btn_end);
+
+
+        final TimePickerDialog.OnTimeSetListener timelisten_start = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
+                update();
+            }
+        };
+
+        final DatePickerDialog.OnDateSetListener datelisten_start = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
+                calendar.set(year, monthOfYear, dayOfMonth);
+                update();
+                TimePickerDialog.newInstance(timelisten_start, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getActivity().getFragmentManager(), "timePicker");
+
+            }
+        };
+
+
+        final TimePickerDialog.OnTimeSetListener timelisten_end = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
+                update_end();
+            }
+        };
+
+
+        final DatePickerDialog.OnDateSetListener datelisten_end = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
+                calendar.set(year, monthOfYear, dayOfMonth);
+                update_end();
+                TimePickerDialog.newInstance(timelisten_end, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getActivity().getFragmentManager(), "timePicker");
+            }
+        };
+
+
+
 
 
         date_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog.newInstance(newPollFragment.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getActivity().getFragmentManager(), "datePicker");
+                DatePickerDialog.newInstance(datelisten_start, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getActivity().getFragmentManager(), "datePicker");
 
             }
         });
+
+        date_btn_end.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog.newInstance(datelisten_end, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getActivity().getFragmentManager(), "datePicker");
+
+            }
+        });
+
 
 
         final String new_option_txt = new_option_input.getText().toString();
@@ -343,6 +406,7 @@ public class newPollFragment extends Fragment implements DatePickerDialog.OnDate
                         OptionsArray.add(new_option_input.getText().toString());
                         adapter.notifyDataSetChanged();
                         new_option_input.setText("");
+                        Log.d("onClickarray: ",OptionsArray.toString()+" "+OptionsArray.size());
                     }
                 }
             });
@@ -423,15 +487,34 @@ public class newPollFragment extends Fragment implements DatePickerDialog.OnDate
                 EditText title_input = (EditText) vi.findViewById(new_poll_title_EditText);
                 EditText desc_input = (EditText) vi.findViewById(new_poll_description_EditText);
                 EditText tags_input = (EditText) vi.findViewById(new_poll_tags_EditText);
+                EditText age_from = (EditText) vi.findViewById(age_from_edittext);
+                EditText age_to = (EditText) vi.findViewById(age_to_edittext);
+
+
+                CheckBoxGroupView cbGroupDegree = (CheckBoxGroupView) vi.findViewById(R.id.cbGroupGrade);
+                CheckBoxGroupView cbGroupEmploy = (CheckBoxGroupView) vi.findViewById(R.id.cbGroupemploy);
+                CheckBoxGroupView cbGroupMarriage = (CheckBoxGroupView) vi.findViewById(R.id.cbGroupmarr);
+                CheckBoxGroupView cbGroupgender = (CheckBoxGroupView) vi.findViewById(R.id.cbGroupsex);
+                JSONObject from = new JSONObject();
+                JSONObject schedule_obj = new JSONObject();
+                JSONArray degree_arr = new JSONArray();
+                JSONArray employ_arr = new JSONArray();
+                JSONArray marriage_arr = new JSONArray();
+                JSONArray gender_arr = new JSONArray();
+                JSONArray age_range = new JSONArray();
 
 
                 /////////////////////////////POLL INFO TO SEND////////////////////////////////////
                 String poll_title = title_input.getText().toString();
                 String poll_desc = desc_input.getText().toString();
                 String poll_type = chosen_poll_type;
+                String age_range_str = age_from.getText().toString()+"-"+age_to.getText().toString();
                 ArrayList<String> options_array = OptionsArray;
                 ArrayList<String> answers_array = CorrectOptionsArray;
-
+                List<Object> group_degree = cbGroupDegree.getCheckedIds();
+                List<Object> group_employ = cbGroupEmploy.getCheckedIds();
+                List<Object> group_marriage = cbGroupMarriage.getCheckedIds();
+                List<Object> group_gender = cbGroupgender.getCheckedIds();
 
 
 
@@ -454,15 +537,79 @@ public class newPollFragment extends Fragment implements DatePickerDialog.OnDate
                 public void onClick(View v) {
                     JSONObject jsonBody = new JSONObject();
                     try {
-                        for (int i=0; i <= OptionsArray.size(); i++){
+                        for (int i=0; i < OptionsArray.size(); i++){
 
                             JSONObject jsonBody2 = new JSONObject();
                             String title = OptionsArray.get(i);
                             jsonBody2.put("title",title);
-
+                            jsonBody2.put("type","select");
                             answers_j_array.put(jsonBody2);
 
+
                         }
+
+                        if (group_degree.size() > 0) {
+
+                            for (int i = 0; i < group_degree.size(); i++) {
+
+                                if (group_degree.size() > 0) {
+                                    String title = group_degree.get(i).toString();
+                                    degree_arr.put(title);
+                                }
+
+                            }
+                        }
+
+                        if (group_employ.size() > 0) {
+
+                            for (int i = 0; i < group_employ.size(); i++) {
+
+                                if (group_employ.size() > 0) {
+                                    String title = group_employ.get(i).toString();
+                                    employ_arr.put(title);
+                                }
+
+                            }
+                        }
+
+                        if (group_marriage.size() > 0) {
+
+                            for (int i = 0; i < group_marriage.size(); i++) {
+
+                                if (group_marriage.size() > 0) {
+                                    String title = group_marriage.get(i).toString();
+                                    marriage_arr.put(title);
+                                }
+
+                            }
+                        }
+
+                        if (group_gender.size() > 0) {
+
+                            for (int i = 0; i < group_gender.size(); i++) {
+
+                                if (group_gender.size() > 0) {
+                                    String title = group_gender.get(i).toString();
+                                    gender_arr.put(title);
+                                }
+
+                            }
+                        }
+
+                        from.put("degree",degree_arr);
+                        from.put("employmentstatus",employ_arr);
+                        from.put("marrital",marriage_arr);
+                        from.put("gender",gender_arr);
+                        age_range.put(age_range_str);
+                        from.put("range",age_range);
+
+                        if(datetimetxt.getText() != null) {
+                            schedule_obj.put("start", datetimetxt.getText());
+                        }
+                        if(datetimetxt_end.getText() != null) {
+                            schedule_obj.put("end", datetimetxt_end.getText());
+                        }
+
 
 
 
@@ -473,13 +620,47 @@ public class newPollFragment extends Fragment implements DatePickerDialog.OnDate
                         //jsonBody.put("cat", poll_type);
                         jsonBody.put("hidden_result", poll_hide);
                         jsonBody.put("answers",answers_j_array);
+                        jsonBody.put("from",from);
+                        jsonBody.put("schedule",schedule_obj);
+
+
 
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
+                    /*
+                    File final_file = new File(image_path);
 
+                    try {
+                        MultipartEntity entity = new MultipartEntity();
+
+                        FileBody fileBody = new FileBody(final_file); // image should be
+                        // a String
+                        entity.addPart("file", fileBody);
+
+                        entity.addPart("title",new StringBody(poll_title));
+                        entity.addPart("description",new StringBody(poll_desc));
+                        entity.addPart("summary",new StringBody(poll_desc));
+                        //jsonBody.put("type", poll_type);
+                        //jsonBody.put("cat", poll_type);
+                        entity.addPart("hidden_result",poll_hide);
+                        jsonBody.put("answers",answers_j_array);
+                        jsonBody.put("from",from);
+                        jsonBody.put("schedule",schedule_obj);
+
+
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    */
+
+                    final MultipartEntity entity = new MultipartEntity();
+                    File final_file = new File(image_path);
+                    FileBody fileBody = new FileBody(final_file); // image should be
+                    // a String
+                    entity.addPart("file", fileBody);
 
 
 
@@ -515,6 +696,27 @@ public class newPollFragment extends Fragment implements DatePickerDialog.OnDate
                                 headers.put("Authorization", token_guest);
 
                                 return headers;
+                            }
+
+                            @Override
+                            public byte[] getBody() {
+                                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                                try {
+
+
+
+                                    entity.writeTo(bos);
+                                    String entityContentAsString = new String(bos.toByteArray());
+                                    Log.e("volley", entityContentAsString);
+                                } catch (IOException e) {
+                                    VolleyLog.e("IOException writing to ByteArrayOutputStream");
+                                }
+                                return bos.toByteArray();
+                            }
+
+                            @Override
+                            public String getBodyContentType() {
+                                return entity.getContentType().getValue();
                             }
 
                         };
@@ -592,6 +794,9 @@ public class newPollFragment extends Fragment implements DatePickerDialog.OnDate
         if (data != null) {
             try {
                 bm = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(), data.getData());
+                image_path = data.getData().getPath();
+                Log.d("selected poll image:",image_path);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -666,23 +871,16 @@ public class newPollFragment extends Fragment implements DatePickerDialog.OnDate
     }
 
 
-    @Override
-    public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
-        calendar.set(year, monthOfYear, dayOfMonth);
-        update();
-        TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getActivity().getFragmentManager(), "timePicker");
-    }
 
-    @Override
-    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
-        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        calendar.set(Calendar.MINUTE, minute);
-        update();
-    }
 
     public void update(){
 
         datetimetxt.setText(dateFormat.format(calendar.getTime())+ " "+ timeFormat.format(calendar.getTime()));
+    }
+
+    public void update_end(){
+
+        datetimetxt_end.setText(dateFormat.format(calendar.getTime())+ " "+ timeFormat.format(calendar.getTime()));
     }
 
 
