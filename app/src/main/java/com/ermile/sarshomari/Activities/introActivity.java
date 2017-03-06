@@ -80,8 +80,8 @@ public class introActivity extends AppIntro {
 
         }
 
-        addSlide(AppIntroFragment.newInstance(getResources().getString(R.string.test_welcom),"fonts/IRANSans.ttf","به سرشمار خوش آمدید","fonts/IRANSans.ttf",R.drawable.logo, Color.parseColor("#094b58")));
-        addSlide(AppIntroFragment.newInstance("راهنمای استفاده","fonts/IRANSans.ttf","سرشمار بهترین نظرسنج","fonts/IRANSans.ttf",R.drawable.logo, Color.parseColor("#4b0049")));
+        addSlide(AppIntroFragment.newInstance(getResources().getString(R.string.test_welcom),"fonts/IRANSans.ttf","به سرشمار خوش آمدید","fonts/IRANSans.ttf",R.drawable.lgs, Color.parseColor("#094b58")));
+        addSlide(AppIntroFragment.newInstance("راهنمای استفاده","fonts/IRANSans.ttf","سرشمار بهترین نظرسنج","fonts/IRANSans.ttf",R.drawable.lgs, Color.parseColor("#4b0049")));
 
 
 

@@ -61,6 +61,7 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.content.StringBody;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -668,7 +669,7 @@ public class newPollFragment extends Fragment {
 
                     if (token_guest != null) {
 
-                        String url ="https://dev.sarshomar.com/api/v1/poll?token="+token_guest;
+                        String url ="https://sarshomar.com/api/v1/poll/";
                         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST,
                                 url, jsonBody,
                                 new Response.Listener<JSONObject>() {
@@ -676,6 +677,8 @@ public class newPollFragment extends Fragment {
                                     public void onResponse(JSONObject response) {
                                         // response
                                         Log.d("Response", response.toString());
+                                        Toast.makeText(getActivity().getApplicationContext(),"نظرسنجی با موفقیت ارسال شد",Toast.LENGTH_LONG);
+                                        getActivity().recreate();
                                     }
                                 },
                                 new Response.ErrorListener() {
@@ -693,7 +696,7 @@ public class newPollFragment extends Fragment {
                             public Map<String, String> getHeaders() throws AuthFailureError {
                                 HashMap<String, String> headers = new HashMap<>();
 
-                                headers.put("Authorization", token_guest);
+                                headers.put("api_token", token_guest);
 
                                 return headers;
                             }

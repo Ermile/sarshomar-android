@@ -47,10 +47,9 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
     compile 'com.google.android.gms:play-services-auth:9.6.1'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
-    compile('org.apache.httpcomponents:httpmime:4.3') {
-        exclude module: "httpclient"
-    }
-    compile 'com.loopj.android:android-async-http:1.4.9'
+    compile files('libs/httpcomponents-httpmime-4.5.2.jar')
+    compile 'org.apache.httpcomponents:httpcore:4.4.1'
+    //compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.github.citux:datetimepicker:0.2.0'
 

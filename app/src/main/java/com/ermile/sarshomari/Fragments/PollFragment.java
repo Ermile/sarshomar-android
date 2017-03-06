@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +50,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+
 import static android.content.Context.MODE_PRIVATE;
 
 
@@ -79,7 +82,7 @@ public class PollFragment extends Fragment {
 
         View vi = inflater.inflate(R.layout.fragment_poll, container, false);
 
-        FloatingActionButton fab = (FloatingActionButton) vi.findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) vi.findViewById(R.id.fab);
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +104,7 @@ public class PollFragment extends Fragment {
 
 
 
-        getAndSetRandomPoll();
+
 
 
         final CheckBoxGroupView cbGroup = (CheckBoxGroupView) vi.findViewById(R.id.cbGroup);
@@ -185,6 +188,21 @@ public class PollFragment extends Fragment {
                 createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
         pre_btn.setTypeface( Typeface.
                 createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
+
+
+        Button get_poll_btn = (Button) vi.findViewById(R.id.start_poll_btn);
+        final RelativeLayout cover_layout = (RelativeLayout) vi.findViewById(R.id.cover_pre);
+
+        get_poll_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getAndSetRandomPoll();
+                cover_layout.setVisibility(View.GONE);
+                fab.setVisibility(View.VISIBLE);
+                YoYo.with(Techniques.BounceInLeft).playOn(fab);
+                YoYo.with(Techniques.FadeOutDown).playOn(cover_layout);
+            }
+        });
 
 
 
@@ -335,7 +353,7 @@ public void getAndSetRandomPoll(){
 
 
 
-    final String url = "https://dev.sarshomar.com/api/v1/poll/ask?token="+token_guest;
+    final String url = "https://sarshomar.com/api/v1/poll/random/";
 
 // prepare the Request
     JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -358,10 +376,21 @@ public void getAndSetRandomPoll(){
     ){
         @Override
         public Map<String, String> getHeaders() throws AuthFailureError {
-            HashMap<String, String> headers = new HashMap<>();
 
-            headers.put("Authorization", token_guest);
-            return headers;
+
+
+            HashMap<String, String> mheaders = new HashMap<>();
+
+/*
+            String credentials = "ermile:Ermile1233";
+            String auth = "Basic "
+                    + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+            mheaders.put("Content-Type", "application/json");
+            Log.d("getHeaders: ",mheaders.toString());
+            mheaders.put("Authorization", auth);
+            */
+            mheaders.put("api_token", token_guest);
+            return mheaders;
         }
     };
 

@@ -43,7 +43,7 @@
     <string name="answer">Answer:</string>
     <string name="download">Download</string>
     <string name="poll_results">Poll Results</string>
-
+    <string name="askme">Ask Me</string>
 
     <string name="profile">Profile</string>
     <string name="loginwithgoogle">sign in with google account</string>

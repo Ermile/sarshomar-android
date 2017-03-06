@@ -39,9 +39,40 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
+            android:visibility="gone"
             android:layout_marginLeft="15dp"
             android:layout_marginBottom="85dp"
             app:srcCompat="@drawable/ic_chart" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="#fff"
+            android:visibility="visible"
+            android:id="@+id/cover_pre"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_above="@+id/start_poll_btn"
+                android:src="@drawable/lg"
+                android:scaleX="0.75"
+                android:layout_marginBottom="5dp"
+                android:scaleY="0.75"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="120dp"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="#fff"
+                android:id="@+id/start_poll_btn"
+                android:layout_centerInParent="true"
+                android:textSize="18sp"
+                android:text="@string/askme"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+
     </RelativeLayout>
 
 </FrameLayout>

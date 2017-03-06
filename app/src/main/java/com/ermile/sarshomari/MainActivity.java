@@ -40,12 +40,9 @@ import com.ermile.sarshomari.Activities.HelpActivity;
 import com.ermile.sarshomari.Activities.ProfileActivity;
 import com.ermile.sarshomari.Activities.SettingsActivity;
 import com.ermile.sarshomari.Classes.HttpRequest;
-import com.ermile.sarshomari.Classes.universalGETRestAPI;
 import com.ermile.sarshomari.Fragments.PollFragment;
 import com.ermile.sarshomari.Fragments.SearchFragment;
 import com.ermile.sarshomari.Fragments.newPollFragment;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.TextHttpResponseHandler;
 import com.ncapdevi.fragnav.FragNavController;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -67,9 +64,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import cz.msebera.android.httpclient.Header;
-
-import cz.msebera.android.httpclient.conn.ssl.SSLSocketFactory;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
@@ -331,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
 public void checkToken(){
 
 
-        final String url = "https://dev.sarshomar.com/api/v1/token/guest";
+        final String url ="https://sarshomar.com/api/v1/token/guest";
 
 // prepare the Request
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -341,7 +335,7 @@ public void checkToken(){
                     @Override
                     public void onResponse(JSONObject response) {
                         // display response
-                        Log.d("Response", response.toString());
+                        Log.d("Response_token", response.toString());
 
 
                         try {
@@ -367,11 +361,22 @@ public void checkToken(){
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<>();
+                HashMap<String, String> mheaders = new HashMap<>();
 
-                headers.put("Authorization", "$2y$07$wWPwmNYVE0MfYu043zYwuONdnhKqKfp3SKzXiUu9eJXVmzw2.frh2");
-                return headers;
+
+                /*
+                String credentials = "ermile:Ermile1233";
+                String auth = "Basic "
+                        + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+                mheaders.put("Content-Type", "application/json");
+                Log.d("getHeaders: ",mheaders.toString());
+                mheaders.put("Authorization", auth);
+                */
+                mheaders.put("api_token","$2y$07$mNMRd07JHIx/bKKdFGKU7.Vv/eWPM83VWZ.AYoKt0ufQAptCf99VO");
+                return mheaders;
             }
+
+
         };
 
 // add it to the RequestQueue
