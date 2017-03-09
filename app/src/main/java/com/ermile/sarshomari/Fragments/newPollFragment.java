@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -58,7 +59,13 @@ import com.ermile.sarshomari.R;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
+import org.apache.http.Header;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.ContentType;
@@ -83,6 +90,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
+import cz.msebera.android.httpclient.entity.StringEntity;
+
 import static android.content.Context.MODE_PRIVATE;
 import static com.ermile.sarshomari.R.id.age_from_edittext;
 import static com.ermile.sarshomari.R.id.age_to_edittext;
@@ -92,6 +101,7 @@ import static com.ermile.sarshomari.R.id.hide_results_switch;
 import static com.ermile.sarshomari.R.id.new_poll_description_EditText;
 import static com.ermile.sarshomari.R.id.new_poll_tags_EditText;
 import static com.ermile.sarshomari.R.id.new_poll_title_EditText;
+
 
 
 /**
@@ -624,6 +634,10 @@ public class newPollFragment extends Fragment {
                         jsonBody.put("from",from);
                         jsonBody.put("schedule",schedule_obj);
 
+                        File final_file = new File(image_path);
+
+                        jsonBody.put("file",final_file.toString());
+
 
 
 
@@ -657,17 +671,54 @@ public class newPollFragment extends Fragment {
                     }
                     */
 
-                    final MultipartEntity entity = new MultipartEntity();
-                    File final_file = new File(image_path);
-                    FileBody fileBody = new FileBody(final_file); // image should be
-                    // a String
-                    entity.addPart("file", fileBody);
 
 
 
+
+                    ProgressBar pb = new ProgressBar(getContext());
                     //String user_token = getActivity().getSharedPreferences("user_token", MODE_PRIVATE).getString("utkn",null);
 
                     if (token_guest != null) {
+
+                        AsyncHttpClient client = new AsyncHttpClient();
+                        client.addHeader("api_token", token_guest);
+                        client.addHeader("Accept", "application/json");
+                        client.addHeader("Content_Type", "application/json");
+
+                        try {
+
+                            StringEntity entity = new StringEntity(jsonBody.toString());
+
+
+
+                        client.post(getActivity().getApplicationContext(),"http://sarshomar.com/api/v1/poll/",entity,"application/json", new TextHttpResponseHandler() {
+
+                            @Override
+                            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString, Throwable throwable) {
+                                Log.d("onFail: ",responseString);
+                            }
+
+                            @Override
+                            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString) {
+                                Log.d("onSuccess: ",responseString);
+                            }
+
+                            @Override
+                            public void onStart() {
+                                // called before request is started
+                            }
+
+
+                            @Override
+                            public void onRetry(int retryNo) {
+                                // called when request is retried
+                            }
+                        });
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+
+                        /*
 
                         String url ="https://sarshomar.com/api/v1/poll/";
                         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST,
@@ -725,6 +776,7 @@ public class newPollFragment extends Fragment {
                         };
 
                         mRequestQueue.add(postRequest);
+                        */
                     }
                 }
             });
