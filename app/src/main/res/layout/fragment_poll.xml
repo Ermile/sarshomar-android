@@ -9,26 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--single choice poll-->
-        <include layout="@layout/choose_one_layout" android:id="@+id/single_choose_poll" android:visibility="gone" />
+
 
         <!--multiple choice poll-->
         <include layout="@layout/multiple_choice_layout" android:id="@+id/multiple_choose_poll" android:visibility="gone"/>
 
-        <!--notify poll-->
-        <include layout="@layout/notify_poll_layout" android:id="@+id/notify_poll" android:visibility="gone"/>
 
-        <!--star poll-->
-        <include layout="@layout/star_poll_layout" android:id="@+id/star_poll" android:visibility="gone"/>
-
-        <!--explain poll-->
-        <include layout="@layout/explain_poll_layout" android:id="@+id/explain_poll" android:visibility="gone"/>
-
-        <!--file poll-->
-        <include layout="@layout/file_poll_layout" android:id="@+id/file_poll" android:visibility="gone"/>
-
-        <!--range poll-->
-        <include layout="@layout/range_poll_layout" android:id="@+id/range_poll" android:visibility="gone"/>
 
 
 

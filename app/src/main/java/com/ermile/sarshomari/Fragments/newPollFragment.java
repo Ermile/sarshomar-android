@@ -62,6 +62,7 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
@@ -128,6 +129,7 @@ public class newPollFragment extends Fragment {
     Boolean poll_hide;
     String image_path="null";
     JSONArray answers_j_array;
+    RequestParams paramss = new RequestParams();
 
 
 
@@ -624,24 +626,28 @@ public class newPollFragment extends Fragment {
 
 
 
-                        jsonBody.put("title", poll_title);
-                        jsonBody.put("description", poll_desc);
-                        jsonBody.put("summary", poll_desc);
+
+
+                        paramss.put("title", poll_title);
+                        paramss.put("description", poll_desc);
+                        paramss.put("summary", poll_desc);
                         //jsonBody.put("type", poll_type);
                         //jsonBody.put("cat", poll_type);
-                        jsonBody.put("hidden_result", poll_hide);
-                        jsonBody.put("answers",answers_j_array);
-                        jsonBody.put("from",from);
-                        jsonBody.put("schedule",schedule_obj);
+                        paramss.put("hidden_result", poll_hide);
+                        paramss.put("answers",answers_j_array);
+                        paramss.put("from",from);
+                        paramss.put("schedule",schedule_obj);
 
                         File final_file = new File(image_path);
 
-                        jsonBody.put("file",final_file.toString());
+                        paramss.put("file",final_file);
 
 
 
 
                     } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
 
@@ -687,11 +693,11 @@ public class newPollFragment extends Fragment {
 
                         try {
 
-                            StringEntity entity = new StringEntity(jsonBody.toString());
 
 
 
-                        client.post(getActivity().getApplicationContext(),"http://sarshomar.com/api/v1/poll/",entity,"application/json", new TextHttpResponseHandler() {
+
+                        client.post("http://sarshomar.com/api/v1/poll/",paramss, new JsonHttpResponseHandler() {
 
                             @Override
                             public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString, Throwable throwable) {
@@ -714,7 +720,7 @@ public class newPollFragment extends Fragment {
                                 // called when request is retried
                             }
                         });
-                        } catch (UnsupportedEncodingException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 

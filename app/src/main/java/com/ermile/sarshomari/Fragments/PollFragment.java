@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +43,14 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.gson.JsonObject;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -61,6 +69,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class PollFragment extends Fragment {
 
     public RequestQueue mRequestQueue;
+    ArrayList<String> value_array = new ArrayList<String>();
+    ArrayList<String> title_array = new ArrayList<String>();
+    String poll_id;
+    CheckBoxGroupView cbGroups;
 
 
 
@@ -80,7 +92,10 @@ public class PollFragment extends Fragment {
         AppController mApp = ((AppController) getActivity().getApplicationContext());
         mRequestQueue = mApp.getmRequestQueue();
 
-        View vi = inflater.inflate(R.layout.fragment_poll, container, false);
+
+        final View vi = inflater.inflate(R.layout.fragment_poll, container, false);
+
+        cbGroups = (CheckBoxGroupView) vi.findViewById(R.id.grc);
 
         final FloatingActionButton fab = (FloatingActionButton) vi.findViewById(R.id.fab);
 
@@ -92,7 +107,7 @@ public class PollFragment extends Fragment {
                 results_dialog.setTitle(getResources().getString(R.string.poll_results));
                 results_dialog.setContentView(R.layout.my_chart_dialog_layout);
                 results_dialog.show();
-                setupBarChart(results_dialog);
+                setupPieChart(results_dialog);
             }
         });
 
@@ -107,43 +122,7 @@ public class PollFragment extends Fragment {
 
 
 
-        final CheckBoxGroupView cbGroup = (CheckBoxGroupView) vi.findViewById(R.id.cbGroup);
 
-        CheckBox cb = new CheckBox(getActivity());
-        cb.setTag(1);
-        cb.setText("مرسدس بنز");
-        cb.setTypeface( Typeface.
-                createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
-
-        CheckBox cb2 = new CheckBox(getActivity());
-        cb.setTag(2);
-        cb2.setText("فورد");
-        cb2.setTypeface( Typeface.
-                createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
-
-        CheckBox cb3 = new CheckBox(getActivity());
-        cb.setTag(3);
-        cb3.setText("هیوندای");
-        cb3.setTypeface( Typeface.
-                createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
-
-        CheckBox cb4 = new CheckBox(getActivity());
-        cb.setTag(4);
-        cb4.setText("تویوتا");
-        cb4.setTypeface( Typeface.
-                createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
-
-        CheckBox cb5 = new CheckBox(getActivity());
-        cb.setTag(5);
-        cb5.setText("لامبورگینی");
-        cb5.setTypeface( Typeface.
-                createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
-
-        cbGroup.put(cb);
-        cbGroup.put(cb2);
-        cbGroup.put(cb3);
-        cbGroup.put(cb4);
-        cbGroup.put(cb5);
 
 
 
@@ -171,10 +150,7 @@ public class PollFragment extends Fragment {
 
         EditText edittext_explain = (EditText) vi.findViewById(R.id.explain_poll_answer_edittext);
         TextView title_explain = (TextView) vi.findViewById(R.id.answer_title);
-        edittext_explain.setTypeface( Typeface.
-                createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
-        title_explain.setTypeface( Typeface.
-                createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
+
 
         Button pre_btn = (Button) vi.findViewById(R.id.previous_poll_button);
         Button ok_btn = (Button) vi.findViewById(R.id.verify_poll_button);
@@ -184,10 +160,7 @@ public class PollFragment extends Fragment {
 
         nxt_btn.setTypeface( Typeface.
                 createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
-        ok_btn.setTypeface( Typeface.
-                createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
-        pre_btn.setTypeface( Typeface.
-                createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
+
 
 
         Button get_poll_btn = (Button) vi.findViewById(R.id.start_poll_btn);
@@ -196,13 +169,29 @@ public class PollFragment extends Fragment {
         get_poll_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getAndSetRandomPoll();
+                getAndSetRandomPoll(vi);
                 cover_layout.setVisibility(View.GONE);
                 fab.setVisibility(View.VISIBLE);
                 YoYo.with(Techniques.BounceInLeft).playOn(fab);
                 YoYo.with(Techniques.FadeOutDown).playOn(cover_layout);
             }
         });
+
+        Button acceptpollbtn = (Button) vi.findViewById(R.id.verify_poll_buttons);
+
+        acceptpollbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Sendpollanswer();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
 
 
 
@@ -232,30 +221,32 @@ public class PollFragment extends Fragment {
 
 
         PieChart pieChart = (PieChart) results_dialog.findViewById(R.id.chart);
+        pieChart.setVisibility(View.VISIBLE);
 
         pieChart.setTouchEnabled(true);
         pieChart.setUsePercentValues(true);
         pieChart.setDrawHoleEnabled(true);
         pieChart.setUsePercentValues(true);
+        pieChart.isUsePercentValuesEnabled();
+
 
 
 
         ArrayList<Entry> entries = new ArrayList<>();
-        entries.add(new Entry(32, 0));
-        entries.add(new Entry(43, 1));
-        entries.add(new Entry(13, 2));
-        entries.add(new Entry(54, 3));
-        entries.add(new Entry(22, 4));
+        for (int i = 0; i < value_array.size(); i++){
+            entries.add(new Entry(Integer.valueOf(value_array.get(i)), i));
+        }
+
 
 
         PieDataSet dataset = new PieDataSet(entries, "");
 
         ArrayList<String> labels = new ArrayList<String>();
-        labels.add("مرسدس بنز");
-        labels.add("تویوتا");
-        labels.add("هیوندای");
-        labels.add("لامبورگینی");
-        labels.add("فورد");
+
+        for (int i = 0; i < title_array.size(); i++){
+            labels.add(title_array.get(i));
+        }
+
 
         PieData data = new PieData(labels, dataset);
         dataset.setColors(ColorTemplate.COLORFUL_COLORS); //
@@ -263,6 +254,7 @@ public class PollFragment extends Fragment {
         dataset.setValueTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
         dataset.setValueTextColor(Color.WHITE);
         dataset.setValueTextSize(13);
+        dataset.setDrawValues(true);
         pieChart.setDescription("");
 
         pieChart.setData(data);
@@ -348,8 +340,14 @@ public class PollFragment extends Fragment {
 
 
 
-public void getAndSetRandomPoll(){
+public void getAndSetRandomPoll(final View vie){
     final String token_guest = getActivity().getSharedPreferences("guest_token", MODE_PRIVATE).getString("gtkn",null);
+
+    ImageView poll_image = (ImageView) vie.findViewById(R.id.single_answer_image);
+    final TextView  poll_title = (TextView) vie.findViewById(R.id.multy_answer_title);
+    TextView  poll_type_txt = (TextView) vie.findViewById(R.id.answer_type);
+
+    final TextView  poll_desc = (TextView) vie.findViewById(R.id.single_answer_description);
 
 
 
@@ -362,7 +360,55 @@ public void getAndSetRandomPoll(){
                 @Override
                 public void onResponse(JSONObject response) {
                     // display response
-                    Log.d("Response_random", response.toString());
+                    try {
+                        
+                        JSONObject result_object = response.getJSONObject("result");
+
+                        String p_title = result_object.getString("title");
+                        String p_desc = result_object.getString("description");
+                        poll_id = result_object.getString("id");
+                        Log.d("onResponse_random: ",result_object.toString()
+                        );
+
+                        JSONArray options_json_array = result_object.getJSONObject("result").getJSONArray("answers");
+
+                        poll_title.setText(p_title);
+                        poll_desc.setText(p_desc);
+
+                        for (int i = 0; i < options_json_array.length(); i++){
+
+                            JSONObject jo = options_json_array.getJSONObject(i);
+                            String answer_title = jo.getString("title");
+                            String answer_key = jo.getString("key");
+                            int answer_value = jo.getInt("value_reliable");
+
+                            CheckBox cb = new CheckBox(getActivity());
+                            cb.setTag(answer_key);
+                            cb.setText(answer_title);
+                            cb.setTypeface( Typeface.
+                                    createFromAsset(getActivity().getAssets(), "fonts/IRANSans.ttf"));
+                            cbGroups.addView(cb);
+                            cbGroups.put(cb);
+                            value_array.add(String.valueOf(answer_value));
+                            title_array.add(answer_title);
+
+
+
+
+                            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                @Override
+                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                    Log.d("onStart:",cbGroups.getCheckedIds().toString());
+                                }
+
+                        });
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             },
             new Response.ErrorListener()
@@ -398,6 +444,67 @@ public void getAndSetRandomPoll(){
 // add it to the RequestQueue
     mRequestQueue.add(getRequest);
 }
+
+
+    public void Sendpollanswer() throws JSONException {
+
+
+        String token_guest = getActivity().getSharedPreferences("guest_token", MODE_PRIVATE).getString("gtkn", null);
+        String url = "http://sarshomar.com/api/v1/poll/answer/";
+        RequestParams paramss = new RequestParams();
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.addHeader("Accept", "application/json");
+        client.addHeader("Content_Type", "application/json");
+        client.addHeader("api_token", token_guest);
+
+        if (cbGroups.getCheckedIds().size() > 0){
+
+            JSONObject answers_obj = new JSONObject();
+
+
+            for(int i=0; i < cbGroups.getCheckedIds().size(); i++){
+                answers_obj.put(cbGroups.getCheckedIds().get(i).toString(),true);
+            }
+
+            paramss.put("answers",answers_obj);
+            paramss.put("id",poll_id);
+
+            try {
+
+
+
+                client.post(url,paramss, new TextHttpResponseHandler() {
+
+                    @Override
+                    public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString, Throwable throwable) {
+                        Log.d("onFail: ",responseString+throwable.toString());
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString) {
+                        Log.d("onSuccess_sendpoll: ",responseString);
+                        Toast.makeText(getActivity().getApplicationContext(),responseString,Toast.LENGTH_LONG).show();
+
+                    }
+
+                    @Override
+                    public void onStart() {
+                        // called before request is started
+                    }
+
+
+                    @Override
+                    public void onRetry(int retryNo) {
+                        // called when request is retried
+                    }
+                });
+            } catch (Exception e) {
+                Log.d("Sendpollanswer: ","shit"+"->"+e.toString());
+            }
+
+        }
+
+    }
 
 
 

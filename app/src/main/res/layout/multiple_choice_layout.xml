@@ -28,7 +28,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:id="@+id/single_answer_title"
+            android:id="@+id/multy_answer_title"
             android:layout_marginTop="10dp"
             android:textColor="#000"
             android:padding="10dp"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content" />
 
         <com.ermile.sarshomari.Classes.CheckBoxGroupView
-            android:id="@+id/cbGroup"
+            android:id="@+id/grc"
             android:columnCount="1"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
@@ -86,7 +86,7 @@
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_weight="1"
                 android:layout_marginEnd="10dp"
-                android:id="@+id/verify_poll_button"
+                android:id="@+id/verify_poll_buttons"
                 android:text="@string/verify_choice"
                 android:layout_height="50dp" />
 
